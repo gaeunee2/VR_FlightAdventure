@@ -14,12 +14,13 @@ public class CollisionHandler : MonoBehaviour
         audioSource = GetComponent<AudioSource>();   
     }
 
+
     private void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
         {
             case "Friendly":
-                Debug.Log("¡¡¿∫ √‚πﬂ¿‘¥œ¥Ÿ.");
+                Debug.Log("√Å√Å√Ä¬∫ √É√¢¬π√ü√Ä√î¬¥√è¬¥√ô.");
                 break;
             case "Finish":
                 StartSuccessSequence();
@@ -32,12 +33,14 @@ public class CollisionHandler : MonoBehaviour
     void StartSuccessSequence()
     {
         audioSource.PlayOneShot(success);
+
         GetComponent<Movements>().enabled = false;
         Invoke("NextLevel", levelLoadDelay);
     }
     void StartCrashSequence()
     {
         audioSource.PlayOneShot(crash);
+
         GetComponent<Movements>().enabled = false;
         Invoke("ReloadLevel", levelLoadDelay);
     }
