@@ -5,16 +5,25 @@ public class CollisionHandler : MonoBehaviour
 {
     [SerializeField] float levelLoadDelay = 2f;
 
-    [SerializeField] AudioClip success;
-    [SerializeField] AudioClip crash;
+    [SerializeField] AudioClip successSFX;
+    [SerializeField] AudioClip crashSFX;
+
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem crashParticles;
 
     AudioSource audioSource;
+
+    bool isControllable = true;
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
     private void OnCollisionEnter(Collision other)
     {
+        if(!isControllable)
+        {
+            return;
+        }
         switch (other.gameObject.tag)
         {
             case "Friendly":
@@ -30,13 +39,19 @@ public class CollisionHandler : MonoBehaviour
     }
     void StartSuccessSequence()
     {
-        audioSource.PlayOneShot(success);
+        isControllable = false;
+        audioSource.Stop();
+        audioSource.PlayOneShot(successSFX);
+        successParticles.Play();
         GetComponent<Movements>().enabled = false;
         Invoke("NextLevel", levelLoadDelay);
     }
     void StartCrashSequence()
     {
-        audioSource.PlayOneShot(crash);
+        isControllable = false;
+        audioSource.Stop();
+        audioSource.PlayOneShot(crashSFX);
+        crashParticles.Play();
         GetComponent<Movements>().enabled = false;
         Invoke("ReloadLevel", levelLoadDelay);
     }
