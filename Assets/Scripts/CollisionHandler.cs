@@ -9,7 +9,7 @@ public class CollisionHandler : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Friendly":
-                Debug.Log("ÁÁÀº Ãâ¹ßÀÔ´Ï´Ù.");
+                Debug.Log("ÃÃÃ€Âº ÃƒÃ¢Â¹ÃŸÃ€Ã”Â´ÃÂ´Ã™.");
                 break;
             case "Finish":
                 StartSuccessSequence();
