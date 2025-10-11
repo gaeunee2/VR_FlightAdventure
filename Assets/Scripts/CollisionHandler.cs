@@ -9,10 +9,12 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] AudioClip crash;
 
     AudioSource audioSource;
+    
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();   
     }
+
     private void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
