@@ -3,27 +3,46 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] float levelLoadDelay = 2f;
     private void OnCollisionEnter(Collision other)
     {
-        switch(other.gameObject.tag)
+        switch (other.gameObject.tag)
         {
             case "Friendly":
                 Debug.Log("좋은 출발입니다.");
                 break;
             case "Finish":
-                Debug.Log("도착!");
-                break;
-            case "Fuel":
-                Debug.Log("충돌!");
+                StartSuccessSequence();
                 break;
             default:
-                ReloadLevel();
+                StartCrashSequence();
                 break;
         }
+    }
+    void StartSuccessSequence()
+    {
+        GetComponent<Movements>().enabled = false;
+        Invoke("NextLevel", levelLoadDelay);
+    }
+    void StartCrashSequence()
+    {
+        GetComponent<Movements>().enabled = false;
+        Invoke("ReloadLevel", levelLoadDelay);
     }
     void ReloadLevel()
     {
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentScene);
+    }
+    void NextLevel()
+    {
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        int nextScene = currentScene + 1;
+
+        if (nextScene == SceneManager.sceneCountInBuildSettings)
+        {
+            nextScene = 0;
+        }
+        SceneManager.LoadScene(nextScene);
     }
 }
