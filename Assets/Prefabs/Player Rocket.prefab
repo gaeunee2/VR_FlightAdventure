@@ -1054,6 +1054,7 @@ MonoBehaviour:
     m_Flags: 0
   thrustStrength: 700
   rotationStrength: 100
+  mainEngine: {fileID: 8300000, guid: 3cacaa8de7cab7745a40f5e6fcf0cd04, type: 3}
 --- !u!82 &5016591309367666247
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1163,3 +1164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15df0f8fd6b0edf4b9cbfb606abba84f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelLoadDelay: 2
+  success: {fileID: 8300000, guid: 4f56dddc71fcc3545ac7f22f154a1ec2, type: 3}
+  crash: {fileID: 8300000, guid: 7fdeab0392ad4d7489ade9aafdfedb9a, type: 3}
