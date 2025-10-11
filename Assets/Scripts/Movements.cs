@@ -9,6 +9,8 @@ public class Movements : MonoBehaviour
     [SerializeField] float thrustStrength = 700f;
     [SerializeField] float rotationStrength = 100f;
 
+    [SerializeField] AudioClip mainEngine;
+
     Rigidbody rb;
     AudioSource audioSource;
     private void Start()
@@ -34,9 +36,9 @@ public class Movements : MonoBehaviour
         {
             rb.AddRelativeForce(Vector3.up * thrustStrength * Time.fixedDeltaTime);
 
-            if(!audioSource.isPlaying)
+            if (!audioSource.isPlaying)
             {
-                audioSource.Play();
+                audioSource.PlayOneShot(mainEngine);
             }
         }
         else
@@ -47,12 +49,12 @@ public class Movements : MonoBehaviour
     private void ProcessRotation()
     {
         float rotationInput = rotation.ReadValue<float>();
-        
-        if(rotationInput < 0)
+
+        if (rotationInput < 0)
         {
             ApplyRotation(rotationStrength);
         }
-        else if(rotationInput > 0)
+        else if (rotationInput > 0)
         {
             ApplyRotation(-rotationStrength);
         }
